@@ -579,8 +579,107 @@
       </div>
 
 
+      <h1>The XMLHttpRequest Object</h1>
 
-      <div class="container">
+
+      <button class="rounded" type="button" onclick="loadDoc()">Request data</button>
+      <script>
+      function addRow(input) {
+          var table = document.getElementById("myTable");
+          var i = parseInt(input.id.substring(3, input.id.length));
+          document.getElementById('icon' + i).className = "fa fa-minus";
+          var row = table.insertRow(table.rows.length);
+          row.id = "row" + (i + 1);
+          var cell = row.insertCell(0);
+          cell.innerHTML = '<div class="input-group">'+
+                              '<input id="stock'+(i+1)+'" type="text" class="form-control" />'+
+                              '<span class="input-group-btn">'+
+                                  '<button id="btn'+(i+1)+'" type="button" class="btn btn-primary" onclick="addRow(this)">'+
+                                      '<i  id="icon'+(i+1)+'" class="fa fa-plus" aria-hidden="true"></i>' +
+                                  '</button>'+
+                              '</span>'+
+                           '</div>';
+          $('#btn'+i).attr('onclick', 'remRow(this)');
+        }
+
+        function remRow(input) {
+          var table = document.getElementById("myTable");
+          var i = parseInt(input.id.substring(3, input.id.length));
+          var ind = table.rows["row" +i].rowIndex;
+          table.deleteRow(ind);
+        }
+        </script>
+      <table class="table" id="myTable">
+          <thead>
+              <tr>
+                  <th>
+                      Header
+                  </th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr id="row0">
+                  <td>
+                      <div class="input-group">
+                          <input id="stock0" type="text" class="form-control" />
+                          <span class="input-group-btn">
+                              <button id="btn0" type="button" class="btn btn-primary" onclick="addRow(this)">
+                                <i  id="icon0" class="fa fa-plus" aria-hidden="true"></i>
+                              </button>
+                          </span>
+                      </div>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+
+      <p id="url-blackrock"></p>
+
+
+      <p id="demo"></p>
+
+
+      <script>
+      function loadDoc() {
+        positions = ""
+
+        positions = document.getElementById("stock0").value
+        positions += "~20%7C"
+
+        i = 1;
+
+        while (document.getElementById("stock"+i)) {
+            positions += document.getElementById("stock"+i).value
+            positions += "~20%7C"
+
+            i = i + 1;
+        }
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("demo").innerHTML = this.responseText;
+          }
+        };
+        xhttp.open("GET", "https://www.blackrock.com/tools/hackathon/portfolio-analysis?betaPortfolios=SNP500&calculateExposures=true&calculatePerformance=true&positions=" + positions + "&riskFreeRatePortfolio=LTBILL1-3M", true);
+        xhttp.send();
+
+      //   if (document.getElementById("stock"+i).value) {
+      //   document.getElementById("url-blackrock").innerHTML = document.getElementById("stock0").value
+      //   document.getElementById("url-blackrock").innerHTML += "~20%7C"
+      // }
+      //   i = 1;
+      //
+      //   //  console.log(document.getElementById("stock"+i));
+      //   if (document.getElementById("stock"+i).value) {
+      //     document.getElementById("url-blackrock").innerHTML += document.getElementById("stock"+i).value
+      //     document.getElementById("url-blackrock").innerHTML += "~20%7C"
+      //   }
+
+
+      }
+      </script>
+      <!-- <div class="container">
 
             <h2 style="text-align:center;">
             Holdings
@@ -590,7 +689,7 @@
           <h2 style="text-align:center;">
             Performance ($10,000 Investment)
             </h2>
-      <div id="returns" style="height: 400px; min-width: 310px; min-height:400px; display:block;"></div>
+      <div id="returns" style="height: 400px; min-width: 310px; min-height:400px; display:block;"></div> -->
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
     <footer class="sticky-footer">
