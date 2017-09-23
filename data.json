@@ -1,0 +1,65 @@
+{
+@type :  "ToolsResultBeans",
+allDataReturned :  true,
+bmsRequestTime :  189,
+requestId :  "DTTS-time-20170923_15-40-08_576_env-BLKDMZ_hkey-bzcw04_count-11889",
+requestTime :  2437,
+resultLength :  573185,
+resultMap : {
+PORTFOLIOS : [
+ {
+@type :  "_bws.portfolio.Portfolios",
+portfolios : [
+ {
+@type :  "_bws.Portfolio",
+analyticsMap : { ... },    // 24 items
+calculationTime :  2437,
+exposures : { ... },    // 6 items
+holdings : [ ... ],    // 4 items
+request : { ... },    // 16 items
+returns : { ... },    // 32 items
+riskData : { ... },    // 9 items
+success :  true,
+timerLogs : { ... },    // 11 items
+weightAsFraction :  false
+}
+]
+}
+]
+},
+serverNumber :  1,
+success :  true,
+timerLogs : {
+portfolios.portfolios :  2437,
+portfolios.portfolios.analytics :  0,
+portfolios.portfolios.enrichPositions :  75,
+portfolios.portfolios.enrichPositions.retrieveSecurityData :  75,
+portfolios.portfolios.enrichPositions.retrieveSecurityData.aslQueryTime :  68,
+portfolios.portfolios.enrichPositions.retrieveSecurityData.searchResults :  5,
+portfolios.portfolios.enrichPositions.retrieveSecurityData.searchResults.aslBmsEstimated :  60,
+portfolios.portfolios.enrichPositions.retrieveSecurityData.searchResults.aslQueryTime :  68,
+portfolios.portfolios.enrichPositions.retrieveSecurityData.searchResults.aslSolrElapsedTime :  7,
+portfolios.portfolios.enrichPositions.retrieveSecurityData.searchResults.aslTotalElapsedTime :  8,
+portfolios.portfolios.enrichPositions.retrieveSecurityData.searchResults.solrQueryTime :  0,
+portfolios.portfolios.enrichPositions.risk :  0,
+portfolios.portfolios.exposures :  3,
+portfolios.portfolios.returns :  90,
+portfolios.portfolios.returns.calcReturns :  7,
+portfolios.portfolios.returns.calculateBetaReturns :  2,
+portfolios.portfolios.returns.calculateFullReturnData :  0,
+portfolios.portfolios.returns.enrichReturnData :  2,
+portfolios.portfolios.returns.processRetrievedData :  0,
+portfolios.portfolios.returns.retrieveData :  78,
+portfolios.portfolios.returns.riskFreeReturn :  3,
+portfolios.portfolios.returns.riskFreeReturn.calcReturns :  2,
+portfolios.portfolios.returns.riskFreeReturn.calculateBetaReturns :  0,
+portfolios.portfolios.returns.riskFreeReturn.calculateFullReturnData :  0,
+portfolios.portfolios.returns.riskFreeReturn.enrichReturnData :  0,
+portfolios.portfolios.riskData :  2360,
+portfolios.portfolios.riskData.processResponse :  6,
+portfolios.portfolios.riskData.varServerResponseTime :  2354,
+portfolios.portfolios.riskData.varServerStartTime :  1506181208764,
+portfolios.portfolios.size :  1
+},
+totalRequestTime :  2626
+}
