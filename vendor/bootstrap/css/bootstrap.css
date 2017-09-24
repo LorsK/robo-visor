@@ -599,8 +599,8 @@ pre code {
 .container {
   margin-right: auto;
   margin-left: auto;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding-right: 0px;
+  padding-left: 0px;
   width: 100%;
 }
 
@@ -634,7 +634,7 @@ pre code {
   margin-left: auto;
   padding-right: 15px;
   padding-left: 15px;
-  width: 100%;
+  width: 60%;
 }
 
 .row {
@@ -1322,7 +1322,7 @@ pre code {
 
 .table th,
 .table td {
-  padding: 0.75rem;
+  padding-top: 0.75rem;
   vertical-align: top;
   border-top: 1px solid #e9ecef;
 }

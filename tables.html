@@ -9,7 +9,7 @@
   <meta name="author" content="">
   <title>Robo-Visor</title>
   <!-- Bootstrap core CSS-->
-  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
   <!-- Custom fonts for this template-->
   <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <!-- Page level plugin CSS-->
@@ -32,76 +32,20 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 
   <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+  <nav class="navbar navbar-collapse-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <a class="navbar-brand" href="index.html">Robo-Visor</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-          <a class="nav-link" href="charts.html">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Charts</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-          <a class="nav-link" href="tables.html">
-            <i class="fa fa-fw fa-table"></i>
-            <span class="nav-link-text">Tables</span>
-          </a>
-        </li>
 
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Link">
-          <a class="nav-link" href="#">
-            <i class="fa fa-fw fa-link"></i>
-            <span class="nav-link-text">Link</span>
-          </a>
-        </li>
-      </ul>
-      <ul class="navbar-nav sidenav-toggler">
-        <li class="nav-item">
-          <a class="nav-link text-center" id="sidenavToggler">
-            <i class="fa fa-fw fa-angle-left"></i>
-          </a>
-        </li>
-      </ul>
-      <ul class="navbar-nav ml-auto">
-
-
-        <li class="nav-item">
-          <form class="form-inline my-2 my-lg-0 mr-lg-2">
-            <div class="input-group">
-              <input class="form-control" type="text" placeholder="Search for...">
-              <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">
-                  <i class="fa fa-search"></i>
-                </button>
-              </span>
-            </div>
-          </form>
-        </li>
-
-      </ul>
-    </div>
   </nav>
   <div class="content-wrapper">
     <div class="container-fluid">
-      <!-- Breadcrumbs-->
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-          <a href="#">Home</a>
-        </li>
-        <li class="breadcrumb-item active">Tables</li>
-      </ol>
 
       <div class="card mb-3" id="stockChartID"> </div>
 
-      <h1>The XMLHttpRequest Object</h1>
+      <h1 id="underGraph">Choose a hypothetical portfolio and the start date for investment</h1>
 
 
-      <button class="rounded" type="button" onclick="loadDoc()">Request data</button>
-      <button class="rounded" type="button" onclick="createChart()">Predict!</button>
+      <button class="btn btn-primary" type="button" onclick="loadDoc()">Request data</button>
+      <button class="btn btn-primary" type="button" onclick="createChart()">Predict!</button>
 
       <script>
       function addRow(input) {
@@ -150,7 +94,7 @@
 
       <div class="container">
       <div class="row">
-          <div class='col-sm-6'>
+          <div class='col-md-4 pull-left'>
               <div class="form-group">
                   <div class='input-group date' id='datetimepicker1'>
                       <input id='stockStartDate' type='text' placeholder="yyyymmdd" class="form-control" />
@@ -171,31 +115,56 @@
       </div>
   </div>
 
-
-      <p id="demo"></p>
-
+  <!-- <div class="row">
+    <div class="col-lg-8">
+       Example Bar Chart Card-->
+      <!-- <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-bar-chart"></i> Bar Chart Example</div>
+        <div class="card-body">
+          <canvas id="myBarChart" width="100" height="50"></canvas>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
+    </div>
+    <div class="col-lg-4">
+    </div>
+  </div> -->
 
       <script>
 
       var perms = [];
       var permData = [];
+      var NASDAQstocks = [];
       function loadDoc() {
         perms = [];
         permData = [];
-        permutations([10,20,30,40,50,60,70,80,90,100], 100, document.getElementById("myTable").rows.length);
+        NASDAQstocks = [];
+        permutations([20,25,30,35,40,45,50,55,60,65,70,75,80,85,90,95,100], 100, document.getElementById("myTable").rows.length);
 
         stockStartDate = document.getElementById("stockStartDate").value
+
+        var dateString  = stockStartDate;
+        var year        = dateString.substring(0,4);
+        var month       = dateString.substring(4,6);
+        var day         = dateString.substring(6,8);
+
 
         for (var perm in perms ) {
           var positions = "";
           i = 0;
           positions = document.getElementById("stock"+i).value
+          if (perm == 0) {
+            NASDAQstocks.push(document.getElementById("stock"+i).value);
+          }
           positions += "~" + perms[perm][i] +"%7C"
 
           i = i + 1;
 
           while (document.getElementById("stock"+i)) {
-
+              if (perm == 0) {
+                NASDAQstocks.push(document.getElementById("stock"+i).value);
+              }
               positions += document.getElementById("stock"+i).value
               positions += "~"+perms[perm][i]+"%7C"
               i = i + 1;
@@ -220,7 +189,7 @@
 
               document.getElementById("stockChartID").innerHTML =
                 '<div class="card-header">' +
-                    '<i class="fa fa-area-chart"></i> Area Chart Example</div>' +
+                    '<i class="fa fa-area-chart"></i>Returns since ' + year + '/' + month + '/'+ day +'</div>' +
                     '<div class="card-body">' +
                     '<canvas id="myStockChart" width="100%" height="30"></canvas>' +
                 '</div>';
@@ -250,6 +219,11 @@
 
 
         loadChart(permData[bestPerm][0], permData[bestPerm][1]);
+        var portfolio = "";
+        for (stock in NASDAQstocks) {
+          portfolio += " " + NASDAQstocks[stock] + ": " + perms[bestPerm][stock] + "%"+" ";
+        }
+        document.getElementById("underGraph").innerHTML = "The best portfolio is:" + portfolio;
       }
 
       function loadChart(labels, chartdata) {
@@ -371,6 +345,8 @@
     <script src="js/sb-admin.min.js"></script>
     <!-- Custom scripts for this page-->
     <script src="js/sb-admin-datatables.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="js/sb-admin-charts.js"></script>
 
   </div>
 </body>
